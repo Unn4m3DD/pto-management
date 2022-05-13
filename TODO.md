@@ -1,5 +1,4 @@
 
-Filter shown holidays
 Load File
 Save File
 UI Revamp

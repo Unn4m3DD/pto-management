@@ -29,7 +29,7 @@ const Calendar: React.FC<Props> = ({ people, date, setDate, currentPersonIndex }
           const day = getDay(currentDate)
           let count = 0
           for (let item of people) {
-            if (item.holidays.includes(day)) {
+            if (item.selected && item.holidays.includes(day)) {
               count++
             }
           }
