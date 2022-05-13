@@ -6,7 +6,7 @@ import { PickersDay } from "@mui/x-date-pickers/PickersDay";
 import { useState } from "react";
 import { Person, ReactSetter } from "../../types";
 import { getDay } from "../../utils";
-import AddHolidays from "../AddHolidays";
+import EditHolidays from "../EditHolidays";
 
 interface Props {
   people: Person[]

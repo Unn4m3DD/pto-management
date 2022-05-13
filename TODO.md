@@ -1,9 +1,5 @@
 
-Select person holidays when person is selected
 Filter shown holidays
-Add holiday count
-Remove holiday
-Current holiday count
 Load File
 Save File
 UI Revamp

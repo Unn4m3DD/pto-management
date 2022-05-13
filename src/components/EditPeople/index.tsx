@@ -1,12 +1,7 @@
-import { Box, Button, Checkbox, Dialog, DialogActions, DialogTitle, List, ListItem, ListItemIcon, Snackbar, TextField, Typography } from "@material-ui/core";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { CalendarPicker } from "@mui/x-date-pickers/CalendarPicker";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { PickersDay } from "@mui/x-date-pickers/PickersDay";
+import { Box, Button, Dialog, DialogActions, DialogTitle, List, ListItem, ListItemIcon, Snackbar, TextField, Typography } from "@material-ui/core";
 import { useState } from "react";
 import { Person, ReactSetter } from "../../types";
-import { getDay } from "../../utils";
-import AddHolidays from "../AddHolidays";
+
 import DeleteIcon from '@mui/icons-material/Delete';
 interface Props {
   people: Person[]

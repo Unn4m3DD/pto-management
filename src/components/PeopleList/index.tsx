@@ -7,7 +7,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { Person, ReactSetter } from "../../types";
 import { Box, Button, ButtonGroup, Dialog, DialogTitle } from "@material-ui/core";
 import { useState } from "react";
-import AddHolidays from "../AddHolidays";
+import EditHolidays from "../EditHolidays";
 import "./styles.scss";
 interface Props {
   people: Person[],
@@ -17,7 +17,7 @@ interface Props {
 }
 
 const PeopleList: React.FC<Props> = ({ people, setPeople, setCurrentPersonIndex, setShowEditPeople }) => {
-  const [showAddHoliday, setShowAddHoliday] = useState(false)
+  const [showEditHoliday, setShowEditHoliday] = useState(false)
   return <Box style={{ display: "flex", width: "100%", height: "100%", flexDirection: "column" }}>
     <ListItem className="person-item" style={{ paddingRight: "26px" }}>
       <ListItemIcon className="person-item-checkbox">
@@ -58,7 +58,7 @@ const PeopleList: React.FC<Props> = ({ people, setPeople, setCurrentPersonIndex,
             <Button className="person-item-name" onClick={() => setCurrentPersonIndex(index)}>{item.name}</Button>
             <ButtonGroup aria-label="small secondary button group" className="person-item-count">
               <Button color="primary" size="small">
-                {item.holidayCount}
+                {item.holidayCount - item.holidays.length}
               </Button>
             </ButtonGroup>
           </ListItem>
@@ -67,10 +67,10 @@ const PeopleList: React.FC<Props> = ({ people, setPeople, setCurrentPersonIndex,
     </List>
     <Box sx={{ display: "flex", width: "100%", justifyContent: "center", my: 2 }}>
       <Button style={{ marginRight: 15, marginLeft: 15 }} variant="contained" onClick={() => setShowEditPeople(e => !e)}>Editar Pessoas</Button>
-      <Button style={{ marginRight: 15, marginLeft: 15 }} variant="contained" onClick={() => setShowAddHoliday(e => !e)}>Adicionar Feriados</Button>
+      <Button style={{ marginRight: 15, marginLeft: 15 }} variant="contained" onClick={() => setShowEditHoliday(e => !e)}>Editar Ferias</Button>
     </Box>
-    <Dialog onClose={() => setShowAddHoliday(e => !e)} open={showAddHoliday}>
-      <AddHolidays people={people} setPeople={setPeople} />
+    <Dialog onClose={() => setShowEditHoliday(e => !e)} open={showEditHoliday}>
+      <EditHolidays people={people} setPeople={setPeople} />
     </Dialog>
   </Box>;
 };
