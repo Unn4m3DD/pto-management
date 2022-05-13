@@ -1,0 +1,20 @@
+.person-item {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: space-between !important;
+}
+.person-item-checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5%;
+}
+.person-item-name {
+  width: 60%;
+}
+.person-item-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35%;
+}
