@@ -9,13 +9,16 @@ import PersonDetails from "../PersonDetails";
 import DayDetails from "../DayDetails";
 import BookHolidays from "../BookHolidays";
 import { Dialog } from "@material-ui/core";
+import EditPeople from "../EditPeople";
 
 
 const App = () => {
   const [people, setPeople] = useState<Person[]>(peopleDefault);
+  const [deletedPeople, setDeletedPeople] = useState<Person[]>([]);
   const [currentPersonIndex, setCurrentPersonIndex] = useState<number>(undefined)
   const [date, setDate] = useState<Date>();
-  const [bookinHolidays, setBookingHolidays] = useState(false)
+  const [bookingHolidays, setBookingHolidays] = useState(false)
+  const [showEditPeople, setShowEditPeople] = useState(false)
   return <div className="app">
     <div className="people-list-container">
       {!date && currentPersonIndex === undefined &&
@@ -23,6 +26,7 @@ const App = () => {
           people={people}
           setPeople={setPeople}
           setCurrentPersonIndex={setCurrentPersonIndex}
+          setShowEditPeople={setShowEditPeople}
         />
       }
       {!date && currentPersonIndex !== undefined &&
@@ -48,12 +52,20 @@ const App = () => {
     <div className="calendar-container">
       <Calendar people={people} date={date} setDate={setDate} />
     </div>
-    <Dialog onClose={() => setBookingHolidays(e => !e)} open={bookinHolidays}>
+    <Dialog onClose={() => setBookingHolidays(e => !e)} open={bookingHolidays}>
       <BookHolidays
         setBookingHolidays={setBookingHolidays}
         currentPersonIndex={currentPersonIndex}
         people={people}
         setPeople={setPeople}
+      />
+    </Dialog>
+    <Dialog onClose={() => setShowEditPeople(e => !e)} open={showEditPeople}>
+      <EditPeople
+        people={people}
+        setPeople={setPeople}
+        deletedPeople={deletedPeople}
+        setDeletedPeople={setDeletedPeople}
       />
     </Dialog>
   </div>

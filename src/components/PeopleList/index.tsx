@@ -12,10 +12,11 @@ import "./styles.scss";
 interface Props {
   people: Person[],
   setPeople: ReactSetter<Person[]>,
-  setCurrentPersonIndex: ReactSetter<number>
+  setCurrentPersonIndex: ReactSetter<number>,
+  setShowEditPeople: ReactSetter<boolean>
 }
 
-const PeopleList: React.FC<Props> = ({ people, setPeople, setCurrentPersonIndex }) => {
+const PeopleList: React.FC<Props> = ({ people, setPeople, setCurrentPersonIndex, setShowEditPeople }) => {
   const [showAddHoliday, setShowAddHoliday] = useState(false)
   return <Box style={{ display: "flex", width: "100%", height: "100%", flexDirection: "column" }}>
     <ListItem className="person-item" style={{ paddingRight: "26px" }}>
@@ -65,7 +66,8 @@ const PeopleList: React.FC<Props> = ({ people, setPeople, setCurrentPersonIndex 
       })}
     </List>
     <Box sx={{ display: "flex", width: "100%", justifyContent: "center", my: 2 }}>
-      <Button variant="contained" color="secondary" onClick={() => setShowAddHoliday(e => !e)}>Adicionar Feriados</Button>
+      <Button style={{ marginRight: 15, marginLeft: 15 }} variant="contained" onClick={() => setShowEditPeople(e => !e)}>Editar Pessoas</Button>
+      <Button style={{ marginRight: 15, marginLeft: 15 }} variant="contained" onClick={() => setShowAddHoliday(e => !e)}>Adicionar Feriados</Button>
     </Box>
     <Dialog onClose={() => setShowAddHoliday(e => !e)} open={showAddHoliday}>
       <AddHolidays people={people} setPeople={setPeople} />
