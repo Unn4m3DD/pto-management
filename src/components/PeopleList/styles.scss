@@ -7,14 +7,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 5%;
+  width: 100%;
+  max-width: 5%;
 }
 .person-item-name {
-  width: 60%;
+  width: 100%;
+  max-width: 60%;
 }
 .person-item-count {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 35%;
+  width: 100%;
+  max-width: 35%;
 }

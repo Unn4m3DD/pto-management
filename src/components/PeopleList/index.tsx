@@ -18,7 +18,7 @@ interface Props {
 const PeopleList: React.FC<Props> = ({ people, setPeople, setCurrentPersonIndex }) => {
   const [showAddHoliday, setShowAddHoliday] = useState(false)
   return <Box style={{ display: "flex", width: "100%", height: "100%", flexDirection: "column" }}>
-    <ListItem className="person-item" style={{ marginRight: "26px" }}>
+    <ListItem className="person-item" style={{ paddingRight: "26px" }}>
       <ListItemIcon className="person-item-checkbox">
         <Checkbox
           edge="start"
