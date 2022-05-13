@@ -50,7 +50,7 @@ const App = () => {
       }
     </div>
     <div className="calendar-container">
-      <Calendar people={people} date={date} setDate={setDate} />
+      <Calendar people={people} date={date} setDate={setDate} currentPersonIndex={currentPersonIndex} />
     </div>
     <Dialog onClose={() => setBookingHolidays(e => !e)} open={bookingHolidays}>
       <BookHolidays

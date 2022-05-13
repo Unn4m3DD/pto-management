@@ -13,8 +13,6 @@ interface Props {
   setPeople: ReactSetter<Person[]>
   deletedPeople: Person[]
   setDeletedPeople: ReactSetter<Person[]>
-  currentPersonIndex: number
-  setBookingHolidays: ReactSetter<boolean>
 }
 
 const EditPeople: React.FC<Props> = ({ people, setPeople, deletedPeople, setDeletedPeople }) => {

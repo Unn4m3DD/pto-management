@@ -25,7 +25,7 @@ const PersonDetails: React.FC<Props> = ({ people, setPeople, currentPersonIndex,
     <List className="dates-list">
       {currentPerson.holidays.map((item, index) => {
         const itemDate = new Date(item)
-        return <ListItem className="date-item">
+        return <ListItem className="date-item" key={index}>
           <Button onClick={() => setDate(itemDate)}>
             {itemDate.toLocaleDateString("pt")}
           </Button>

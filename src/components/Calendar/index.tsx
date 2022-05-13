@@ -9,29 +9,44 @@ import { Person, ReactSetter } from "../../types";
 import { getDay } from "../../utils";
 // import { Container } from './styles';
 
-const Calendar: React.FC<{ people: Person[], date: Date, setDate: ReactSetter<Date> }> = ({ people, date, setDate }) => {
+interface Props {
+  people: Person[]
+  date?: Date
+  setDate: ReactSetter<Date>
+  currentPersonIndex: number | undefined
+}
+
+const Calendar: React.FC<Props> = ({ people, date, setDate, currentPersonIndex }) => {
+  console.log(date)
   return <div className="calendar-scale">
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <CalendarPicker
         renderDay={(
-          date,
+          currentDate,
           selectedDates,
           pickersDayProps
         ) => {
-          const day = getDay(date)
+          const day = getDay(currentDate)
           let count = 0
           for (let item of people) {
             if (item.holidays.includes(day)) {
               count++
             }
           }
+
+          const style = (date === undefined && currentPersonIndex !== undefined && people[currentPersonIndex].holidays.includes(day)) ? {
+            style: {
+              color: "white",
+              backgroundColor: "#1565c0"
+            }
+          } : {}
           return <Badge
             key={pickersDayProps.key}
             overlap="circular"
             color="secondary"
             badgeContent={count !== 0 ? count : undefined}
           >
-            <PickersDay {...pickersDayProps} />
+            <PickersDay {...style} {...pickersDayProps} />
           </Badge>
 
         }}
