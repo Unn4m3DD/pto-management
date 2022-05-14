@@ -45,6 +45,7 @@ const PeopleList: React.FC<Props> = ({ people, setPeople, setCurrentPersonIndex,
             <ListItemIcon className="person-item-checkbox">
               <Checkbox
                 edge="start"
+                style={{ color: item.color }}
                 checked={item.selected}
                 tabIndex={-1}
                 disableRipple

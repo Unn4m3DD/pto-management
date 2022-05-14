@@ -43,7 +43,8 @@ const EditPeople: React.FC<Props> = ({ people, setPeople, deletedPeople, setDele
             name: newPersonName,
             holidayCount: 0,
             holidays: new Set(),
-            selected: true
+            selected: true,
+            color: '#' + Math.floor(Math.random() * 16777215).toString(16)
           }])
         }}
       >

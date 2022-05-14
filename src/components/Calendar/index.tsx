@@ -1,5 +1,5 @@
 
-import { Badge } from "@material-ui/core";
+import { Badge, Chip } from "@material-ui/core";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { CalendarPicker } from "@mui/x-date-pickers/CalendarPicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -7,7 +7,7 @@ import { PickersDay } from "@mui/x-date-pickers/PickersDay";
 import { memo, useState } from "react";
 import { Person, ReactSetter } from "../../types";
 import { getDay, shouldDisableDate } from "../../utils";
-// import { Container } from './styles';
+import './styles.scss';
 
 interface Props {
   people: Person[]
@@ -23,6 +23,7 @@ const CalendarItem: React.FC<
 ) => {
   return <LocalizationProvider dateAdapter={AdapterDateFns}>
     <CalendarPicker
+      allowSameDateSelection
       renderDay={(
         currentDate,
         selectedDates,
@@ -30,16 +31,18 @@ const CalendarItem: React.FC<
       ) => {
         const day = getDay(currentDate)
         let count = 0
+        const outPeople = new Set<Person>()
         for (let item of people) {
           if (item.selected && item.holidays.has(day)) {
             count++
+            outPeople.add(item)
           }
         }
 
         const style =
-          (date === undefined && currentPersonIndex !== undefined && people[currentPersonIndex].holidays.has(day)) ?
+          (currentDate === undefined && currentPersonIndex !== undefined && people[currentPersonIndex].holidays.has(day)) ?
             { style: { color: "white", backgroundColor: "#1565c0" } } :
-            (date !== undefined && shouldDisableDate(date)) ?
+            (currentDate !== undefined && shouldDisableDate(currentDate)) ?
               { style: { backgroundColor: "#222", color: "white" } } :
               (date !== undefined && day === getDay(date)) ?
                 { style: { backgroundColor: "red", color: "white" } } :
@@ -50,7 +53,23 @@ const CalendarItem: React.FC<
           color="secondary"
           badgeContent={count !== 0 ? count : undefined}
         >
-          <PickersDay {...style} {...pickersDayProps} />
+          <div style={{ position: "relative" }}>
+            <PickersDay {...style} {...pickersDayProps} />
+            <div className="chip-container">
+              {outPeople.size < 3 ?
+                [...outPeople.values()].map(e => {
+                  return <Chip
+                    className="chip"
+                    style={{
+                      backgroundColor: e.color
+                    }}
+                    label={e.name.split(" ").map(e => e[0].toUpperCase())}
+                  />
+                }) :
+                <Chip className="chip" label={"..."} />
+              }
+            </div>
+          </div>
         </Badge>
 
       }}

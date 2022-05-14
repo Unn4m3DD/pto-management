@@ -3,6 +3,7 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { CalendarPicker } from "@mui/x-date-pickers/CalendarPicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { PickersDay } from "@mui/x-date-pickers/PickersDay";
+import { useEffect } from "react";
 import { useState } from "react";
 import { Person, ReactSetter } from "../../types";
 import { getDay, shouldDisableDate } from "../../utils";
@@ -19,6 +20,9 @@ const BookHolidays: React.FC<Props> = ({ people, setPeople, currentPersonIndex, 
   const [dateError, setDateError] = useState<string>()
   const currentPerson = people[currentPersonIndex]
   const [dates, setDates] = useState<Set<number>>(new Set(currentPerson.holidays))
+  useEffect(() => {
+    setDates(new Set(currentPerson.holidays))
+  }, [setDates, people, currentPersonIndex])
   console.log(currentPerson.holidays)
   const spareDays = currentPerson.holidayCount - dates.size
   return <>
@@ -27,7 +31,7 @@ const BookHolidays: React.FC<Props> = ({ people, setPeople, currentPersonIndex, 
       <Box>{spareDays} dia{spareDays > 1 || spareDays === 0 ? "s" : ""} restatante{spareDays > 1 || spareDays === 0 ? "s" : ""}</Box>
     </DialogTitle>
     <LocalizationProvider dateAdapter={AdapterDateFns}>
-      
+
       <CalendarPicker
         allowSameDateSelection
         shouldDisableDate={(date) => date !== undefined && shouldDisableDate(date)}
