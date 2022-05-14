@@ -1,8 +1,8 @@
 
-import { Badge, Chip } from "@material-ui/core";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { CalendarPicker } from "@mui/x-date-pickers/CalendarPicker";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { Badge, Chip } from "@material-ui/core";
 import { PickersDay } from "@mui/x-date-pickers/PickersDay";
 import { memo, useState } from "react";
 import { Person, ReactSetter } from "../../types";
@@ -57,8 +57,9 @@ const CalendarItem: React.FC<
             <PickersDay {...style} {...pickersDayProps} />
             <div className="chip-container">
               {outPeople.size < 3 ?
-                [...outPeople.values()].map(e => {
+                [...outPeople.values()].map((e, i) => {
                   return <Chip
+                    key={i}
                     className="chip"
                     style={{
                       backgroundColor: e.color

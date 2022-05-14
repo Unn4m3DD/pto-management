@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./styles.scss";
 import { Person } from "../../types";
 import PeopleList from "../PeopleList";
@@ -10,11 +10,14 @@ import DayDetails from "../DayDetails";
 import BookHolidays from "../BookHolidays";
 import { Dialog } from "@material-ui/core";
 import EditPeople from "../EditPeople";
+import { useEffect } from "react";
+import { loadData } from "../../utils";
 
 
 const App = () => {
-  const [people, setPeople] = useState<Person[]>(peopleDefault);
-  const [deletedPeople, setDeletedPeople] = useState<Person[]>([]);
+  const localData = loadData()
+  const [people, setPeople] = useState<Person[]>(localData?.people ?? []);
+  const [deletedPeople, setDeletedPeople] = useState<Person[]>(localData?.deletedPeople ?? []);
   const [currentPersonIndex, setCurrentPersonIndex] = useState<number>(undefined)
   const [date, setDate] = useState<Date>();
   const [bookingHolidays, setBookingHolidays] = useState(false)
@@ -27,6 +30,8 @@ const App = () => {
           setPeople={setPeople}
           setCurrentPersonIndex={setCurrentPersonIndex}
           setShowEditPeople={setShowEditPeople}
+          deletedPeople={deletedPeople}
+          setDeletedPeople={setDeletedPeople}
         />
       }
       {!date && currentPersonIndex !== undefined &&

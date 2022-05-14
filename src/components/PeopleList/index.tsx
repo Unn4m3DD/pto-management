@@ -9,14 +9,17 @@ import { Box, Button, ButtonGroup, Dialog, DialogTitle } from "@material-ui/core
 import { useState } from "react";
 import EditHolidays from "../EditHolidays";
 import "./styles.scss";
+import { download, readFile } from "../../utils";
 interface Props {
   people: Person[],
   setPeople: ReactSetter<Person[]>,
+  deletedPeople: Person[],
+  setDeletedPeople: ReactSetter<Person[]>,
   setCurrentPersonIndex: ReactSetter<number>,
   setShowEditPeople: ReactSetter<boolean>
 }
 
-const PeopleList: React.FC<Props> = ({ people, setPeople, setCurrentPersonIndex, setShowEditPeople }) => {
+const PeopleList: React.FC<Props> = ({ people, setPeople, setCurrentPersonIndex, setShowEditPeople, deletedPeople, setDeletedPeople }) => {
   const [showEditHoliday, setShowEditHoliday] = useState(false)
   return <Box style={{ display: "flex", width: "100%", height: "100%", flexDirection: "column" }}>
     <ListItem className="person-item" style={{ paddingRight: "26px" }}>
@@ -70,10 +73,34 @@ const PeopleList: React.FC<Props> = ({ people, setPeople, setCurrentPersonIndex,
       <Button style={{ marginRight: 15, marginLeft: 15 }} variant="contained" onClick={() => setShowEditPeople(e => !e)}>Editar Pessoas</Button>
       <Button style={{ marginRight: 15, marginLeft: 15 }} variant="contained" onClick={() => setShowEditHoliday(e => !e)}>Editar Ferias</Button>
     </Box>
+    <Box sx={{ display: "flex", width: "100%", justifyContent: "center", my: 2 }}>
+      <Button style={{ marginRight: 15, marginLeft: 15 }} variant="contained"
+        onClick={() => {
+          download(people.map(e => `${e.name}: ${[...e.holidays].map(d => new Date(d).toLocaleDateString("pt")).join(", ")}`).join("\n"))
+        }}
+      >Contabilidade</Button>
+      <Button style={{ marginRight: 15, marginLeft: 15 }} variant="contained"
+        onClick={async () => {
+          const file = JSON.parse(await readFile())
+          localStorage.setItem("data", JSON.stringify(file))
+          document.location.reload()
+        }}
+      >Importar</Button>
+      <Button style={{ marginRight: 15, marginLeft: 15 }} variant="contained"
+        onClick={() => {
+          const file = JSON.stringify({
+            people: people.map(e => ({ ...e, holidays: [...e.holidays] })),
+            deletedPeople: deletedPeople.map(e => ({ ...e, holidays: [...e.holidays] })),
+          })
+          localStorage.setItem("data", JSON.stringify(file))
+          download(file)
+        }}
+      >Gravar</Button >
+    </Box >
     <Dialog onClose={() => setShowEditHoliday(e => !e)} open={showEditHoliday}>
       <EditHolidays people={people} setPeople={setPeople} />
     </Dialog>
-  </Box>;
+  </Box >;
 };
 
 export default PeopleList;
