@@ -18,7 +18,7 @@ const DayDetails: React.FC<Props> = ({ people, date, setDate, setCurrentPersonIn
       {date.toLocaleDateString("pt")}
     </Typography>
     <List className="dates-list">
-      {people.map((e, index) => ({ ...e, index })).filter(e => e.holidays.find(e => e === selectedDay)).map((item, index) => {
+      {people.map((e, index) => ({ ...e, index })).filter(e => e.holidays.has(selectedDay)).map((item, index) => {
         return <ListItem className="date-item">
           <Button
             onClick={() => {

@@ -2455,6 +2455,11 @@
   "resolved" "https://registry.npmjs.org/assert-plus/-/assert-plus-1.0.0.tgz"
   "version" "1.0.0"
 
+"astronomia@^4.0.1":
+  "integrity" "sha512-NT0M9uIII3sOZnZgtqVad5crKFdzLXQTcT+qK80zBkhFOlObhs/OEAnK0WzZuNAraWLDw62RrLhapTHBs6bcsA=="
+  "resolved" "https://registry.npmjs.org/astronomia/-/astronomia-4.0.1.tgz"
+  "version" "4.0.1"
+
 "async-foreach@^0.1.3":
   "integrity" "sha1-NhIfhFwFeBct5Bmpfb6x0W7DRUI="
   "resolved" "https://registry.npmjs.org/async-foreach/-/async-foreach-0.1.3.tgz"
@@ -2832,6 +2837,13 @@
     "lowercase-keys" "1.0.0"
     "normalize-url" "2.0.1"
     "responselike" "1.0.2"
+
+"caldate@^2.0.2":
+  "integrity" "sha512-QKN0INUf20RqK/1QFoqTC00Ibu+90DUWuB1qpsdVu7J/jY5BTep0HE0P2O1E8oOOCHGd5r4xhHCUon4TqPwZiA=="
+  "resolved" "https://registry.npmjs.org/caldate/-/caldate-2.0.2.tgz"
+  "version" "2.0.2"
+  dependencies:
+    "moment-timezone" "^0.5.34"
 
 "call-bind@^1.0.0", "call-bind@^1.0.2":
   "integrity" "sha512-7O+FbCihrB5WGbFYesctwmTKae6rOiIzmz1icreWJ+0aA7LJfuqhEso2T9ncpcFtzMQtzXf2QGGueWJGTYsqrA=="
@@ -3344,10 +3356,51 @@
     "whatwg-mimetype" "^2.3.0"
     "whatwg-url" "^8.0.0"
 
+"date-bengali-revised@^2.0.1":
+  "integrity" "sha512-7D9FceOSpRy1MpLzxs0rMlTaUju9LNnIz6A2Hag3/+nB7RKdVKzuQrO7mchbCqFErLoTM+L5Ja/M03psWqGqGA=="
+  "resolved" "https://registry.npmjs.org/date-bengali-revised/-/date-bengali-revised-2.0.1.tgz"
+  "version" "2.0.1"
+
+"date-chinese@^2.1.3":
+  "integrity" "sha512-g1YSDAY01sBLu5NfjpnhXGZu9xoC1xtEKHlCHQNYUIivz85Iea7WBzGPKUIBPfyejZ6x2YA64HSbTYjmzq2Yew=="
+  "resolved" "https://registry.npmjs.org/date-chinese/-/date-chinese-2.1.3.tgz"
+  "version" "2.1.3"
+  dependencies:
+    "astronomia" "^4.0.1"
+
+"date-easter@^1.0.1":
+  "integrity" "sha512-5uAPmiO5tlztgaJrAy8eQCbsVrvYap12JGQEULi7HtLFRML65Jrop74ylHsA6OrqzcEyd6b9WQRIG/kvNzqC8g=="
+  "resolved" "https://registry.npmjs.org/date-easter/-/date-easter-1.0.1.tgz"
+  "version" "1.0.1"
+
 "date-fns@^2.0.0", "date-fns@^2.25.0":
   "integrity" "sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw=="
   "resolved" "https://registry.npmjs.org/date-fns/-/date-fns-2.28.0.tgz"
   "version" "2.28.0"
+
+"date-holidays-parser@^3.3.0":
+  "integrity" "sha512-L9Al39o7F8vw5l48UiKraYdH/R5ml3cNXhvsaDuLeJ9w6iMywxlJYpzV5M3KARUuJ+c9Mw9JOdqPLZB1cpqn4Q=="
+  "resolved" "https://registry.npmjs.org/date-holidays-parser/-/date-holidays-parser-3.3.0.tgz"
+  "version" "3.3.0"
+  dependencies:
+    "astronomia" "^4.0.1"
+    "caldate" "^2.0.2"
+    "date-bengali-revised" "^2.0.1"
+    "date-chinese" "^2.1.3"
+    "date-easter" "^1.0.1"
+    "deepmerge" "^4.2.2"
+    "moment-timezone" "^0.5.34"
+
+"date-holidays@^3.14.10":
+  "integrity" "sha512-R/Dq/NKE7lEQAkyJm5BT/kklPfbqqflM8HsL0dEUE34OzSvvAui+FEVyNG+9lvWRUc+tSFC+rkKxl4ATw1hc9w=="
+  "resolved" "https://registry.npmjs.org/date-holidays/-/date-holidays-3.14.10.tgz"
+  "version" "3.14.10"
+  dependencies:
+    "date-holidays-parser" "^3.3.0"
+    "js-yaml" "^4.1.0"
+    "lodash.omit" "^4.5.0"
+    "lodash.pick" "^4.4.0"
+    "prepin" "^1.0.3"
 
 "debug@^3.1.1":
   "integrity" "sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ=="
@@ -6262,6 +6315,16 @@
   "resolved" "https://registry.npmjs.org/lodash.merge/-/lodash.merge-4.6.2.tgz"
   "version" "4.6.2"
 
+"lodash.omit@^4.5.0":
+  "integrity" "sha1-brGa5aHuHdnfC5aeZs4Lf6MLXmA="
+  "resolved" "https://registry.npmjs.org/lodash.omit/-/lodash.omit-4.5.0.tgz"
+  "version" "4.5.0"
+
+"lodash.pick@^4.4.0":
+  "integrity" "sha1-UvBWEP/53tQiYRRB7R/BI6AwAbM="
+  "resolved" "https://registry.npmjs.org/lodash.pick/-/lodash.pick-4.4.0.tgz"
+  "version" "4.4.0"
+
 "lodash@^4.17.11", "lodash@^4.17.14", "lodash@^4.17.15", "lodash@^4.17.20", "lodash@^4.17.21", "lodash@^4.7.0", "lodash@~4.17.10":
   "integrity" "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg=="
   "resolved" "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
@@ -6564,6 +6627,18 @@
   "integrity" "sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw=="
   "resolved" "https://registry.npmjs.org/mkdirp/-/mkdirp-1.0.4.tgz"
   "version" "1.0.4"
+
+"moment-timezone@^0.5.34":
+  "integrity" "sha512-3zAEHh2hKUs3EXLESx/wsgw6IQdusOT8Bxm3D9UrHPQR7zlMmzwybC8zHEM1tQ4LJwP7fcxrWr8tuBg05fFCbg=="
+  "resolved" "https://registry.npmjs.org/moment-timezone/-/moment-timezone-0.5.34.tgz"
+  "version" "0.5.34"
+  dependencies:
+    "moment" ">= 2.9.0"
+
+"moment@^2.24.0", "moment@^2.29.1", "moment@>= 2.9.0":
+  "integrity" "sha512-c6YRvhEo//6T2Jz/vVtYzqBzwvPT95JBQ+smCytzf7c50oMZRsR/a4w88aD34I+/QVSfnoAnSBFPJHItlOMJVw=="
+  "resolved" "https://registry.npmjs.org/moment/-/moment-2.29.3.tgz"
+  "version" "2.29.3"
 
 "mozjpeg@^7.0.0":
   "integrity" "sha512-iIDxWvzhWvLC9mcRJ1uSkiKaj4drF58oCqK2bITm5c2Jt6cJ8qQjSSru2PCaysG+hLIinryj8mgz5ZJzOYTv1A=="
@@ -7291,6 +7366,11 @@
   "integrity" "sha1-6SQ0v6XqjBn0HN/UAddBo8gZ2Jc="
   "resolved" "https://registry.npmjs.org/prepend-http/-/prepend-http-2.0.0.tgz"
   "version" "2.0.0"
+
+"prepin@^1.0.3":
+  "integrity" "sha512-0XL2hreherEEvUy0fiaGEfN/ioXFV+JpImqIzQjxk6iBg4jQ2ARKqvC4+BmRD8w/pnpD+lbxvh0Ub+z7yBEjvA=="
+  "resolved" "https://registry.npmjs.org/prepin/-/prepin-1.0.3.tgz"
+  "version" "1.0.3"
 
 "prettier-linter-helpers@^1.0.0":
   "integrity" "sha512-GbK2cP9nraSSUF9N2XwUwqfzlAFlMNYYl+ShE/V+H8a9uNl/oUqB1w2EL54Jh0OlyRSd8RfWYJ3coVS4TROP2w=="

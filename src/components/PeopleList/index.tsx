@@ -58,7 +58,7 @@ const PeopleList: React.FC<Props> = ({ people, setPeople, setCurrentPersonIndex,
             <Button className="person-item-name" onClick={() => setCurrentPersonIndex(index)}>{item.name}</Button>
             <ButtonGroup aria-label="small secondary button group" className="person-item-count">
               <Button color="primary" size="small">
-                {item.holidayCount - item.holidays.length}
+                {item.holidayCount - item.holidays.size}
               </Button>
             </ButtonGroup>
           </ListItem>

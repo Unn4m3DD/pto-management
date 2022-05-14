@@ -42,7 +42,7 @@ const EditPeople: React.FC<Props> = ({ people, setPeople, deletedPeople, setDele
           setPeople([...people, {
             name: newPersonName,
             holidayCount: 0,
-            holidays: [],
+            holidays: new Set(),
             selected: true
           }])
         }}

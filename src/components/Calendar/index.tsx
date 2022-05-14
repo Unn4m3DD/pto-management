@@ -4,9 +4,9 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { CalendarPicker } from "@mui/x-date-pickers/CalendarPicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { PickersDay } from "@mui/x-date-pickers/PickersDay";
-import { useState } from "react";
+import { memo, useState } from "react";
 import { Person, ReactSetter } from "../../types";
-import { getDay } from "../../utils";
+import { getDay, shouldDisableDate } from "../../utils";
 // import { Container } from './styles';
 
 interface Props {
@@ -16,43 +16,77 @@ interface Props {
   currentPersonIndex: number | undefined
 }
 
-const Calendar: React.FC<Props> = ({ people, date, setDate, currentPersonIndex }) => {
-  console.log(date)
-  return <div className="calendar-scale">
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <CalendarPicker
-        renderDay={(
-          currentDate,
-          selectedDates,
-          pickersDayProps
-        ) => {
-          const day = getDay(currentDate)
-          let count = 0
-          for (let item of people) {
-            if (item.selected && item.holidays.includes(day)) {
-              count++
-            }
+const CalendarItem: React.FC<
+  { month: number, people: Person[], date: Date, currentPersonIndex: number, setDate: ReactSetter<Date> }
+> = memo((
+  { month, people, date, currentPersonIndex, setDate }
+) => {
+  return <LocalizationProvider dateAdapter={AdapterDateFns}>
+    <CalendarPicker
+      renderDay={(
+        currentDate,
+        selectedDates,
+        pickersDayProps
+      ) => {
+        const day = getDay(currentDate)
+        let count = 0
+        for (let item of people) {
+          if (item.selected && item.holidays.has(day)) {
+            count++
           }
+        }
 
-          const style = (date === undefined && currentPersonIndex !== undefined && people[currentPersonIndex].holidays.includes(day)) ? {
-            style: {
-              color: "white",
-              backgroundColor: "#1565c0"
-            }
-          } : {}
-          return <Badge
-            key={pickersDayProps.key}
-            overlap="circular"
-            color="secondary"
-            badgeContent={count !== 0 ? count : undefined}
-          >
-            <PickersDay {...style} {...pickersDayProps} />
-          </Badge>
+        const style =
+          (date === undefined && currentPersonIndex !== undefined && people[currentPersonIndex].holidays.has(day)) ?
+            { style: { color: "white", backgroundColor: "#1565c0" } } :
+            (date !== undefined && shouldDisableDate(date)) ?
+              { style: { backgroundColor: "#222", color: "white" } } :
+              (date !== undefined && day === getDay(date)) ?
+                { style: { backgroundColor: "red", color: "white" } } :
+                { style: { color: "black", backgroundColor: "white" } }
+        return <Badge
+          key={pickersDayProps.key}
+          overlap="circular"
+          color="secondary"
+          badgeContent={count !== 0 ? count : undefined}
+        >
+          <PickersDay {...style} {...pickersDayProps} />
+        </Badge>
 
-        }}
-        date={date} onChange={(newDate) => setDate(newDate)}
-      />
-    </LocalizationProvider>
+      }}
+      date={new Date(`${new Date().getFullYear()}-${month}-${new Date().getDate()}`)} onChange={(newDate) => setDate(newDate)}
+    />
+  </LocalizationProvider>
+}, (prev, next) => {
+  if (
+    prev.date?.getMonth() + 1 === prev.month ||
+    prev.date?.getMonth() + 1 === next.month ||
+    next.date?.getMonth() + 1 === prev.month ||
+    next.date?.getMonth() + 1 === next.month
+  )
+    return false
+
+  if (prev.people[prev.currentPersonIndex])
+    for (let holiday of prev.people[prev.currentPersonIndex].holidays.values())
+      if ([prev.month, next.month].includes(new Date(holiday).getMonth() + 1))
+        return false
+
+
+  if (next.people[next.currentPersonIndex])
+    for (let holiday of next.people[next.currentPersonIndex].holidays.values())
+      if ([prev.month, next.month].includes(new Date(holiday).getMonth() + 1))
+        return false
+
+
+  return true
+})
+
+const Calendar: React.FC<Props> = ({ people, date, setDate, currentPersonIndex }) => {
+  return <div className="calendar-scale">
+    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(month => {
+      return <CalendarItem key={month} month={month} currentPersonIndex={currentPersonIndex} people={people} date={date} setDate={setDate} />
+    })}
+
   </div>
 };
 

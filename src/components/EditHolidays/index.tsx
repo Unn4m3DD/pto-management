@@ -70,7 +70,7 @@ const EditHolidays: React.FC<Props> = ({ people, setPeople }) => {
                 -
               </Button>
               <Button color="primary">
-                {item.holidayCount - item.holidays.length}
+                {item.holidayCount - item.holidays.size}
               </Button>
               <Button color="primary" onClick={() => {
                 people[index].holidayCount = people[index].holidayCount + 1

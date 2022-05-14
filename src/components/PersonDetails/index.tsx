@@ -23,7 +23,7 @@ const PersonDetails: React.FC<Props> = ({ people, setPeople, currentPersonIndex,
       style={{ marginTop: "15px" }} variant="contained">Marcar Ferias</Button>
     <Typography style={{ marginTop: "15px" }} variant="h5">Ferias Marcadas:</Typography>
     <List className="dates-list">
-      {currentPerson.holidays.map((item, index) => {
+      {[...currentPerson.holidays.values()].map((item, index) => {
         const itemDate = new Date(item)
         return <ListItem className="date-item" key={index}>
           <Button onClick={() => setDate(itemDate)}>

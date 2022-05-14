@@ -28,20 +28,20 @@ body {
 .calendar-container {
   @extend .flex-centered;
   height: 100%;
-  width: 70%;
-  overflow: hidden
+  width: 80%;
+  overflow: hidden;
 }
 
 .calendar-scale {
-  @extend .flex-centered;
+  display: flex;
   height: 100%;
-  transform: scale(2);
+  flex-wrap: wrap;
 }
 
 .people-list-container {
   display: flex;
   height: 100%;
-  width: 30%;
+  width: 20%;
   background-color: #fafafa;
 }
 
@@ -70,4 +70,12 @@ body {
 
 *::-webkit-scrollbar-thumb {
   background-color: gray;
+}
+
+.css-dhopo2 {
+  min-height: 214px !important;
+  overflow-y: hidden !important;
+}
+.css-1wvgxus-MuiCalendarPicker-viewTransitionContainer {
+  overflow-y: hidden !important;
 }

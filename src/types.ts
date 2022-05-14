@@ -2,7 +2,7 @@ import * as React from "react";
 
 export interface Person {
   name: string,
-  holidays: number[],
+  holidays: Set<number>,
   selected: boolean,
   holidayCount: number
 }
